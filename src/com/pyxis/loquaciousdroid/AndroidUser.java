@@ -1,19 +1,16 @@
 package com.pyxis.loquaciousdroid;
 
-import static com.pyxis.loquaciousdroid.ViewFetcher.NO_RESULT_FOUND;
-import static org.junit.Assert.assertTrue;
-
-import java.util.ArrayList;
-
-import org.junit.Assert;
-
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.app.Instrumentation.ActivityMonitor;
 import android.content.IntentFilter;
 import android.test.ActivityInstrumentationTestCase2;
-import android.view.View;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+
+import static com.pyxis.loquaciousdroid.ViewFetcher.NO_RESULT_FOUND;
+import static org.junit.Assert.assertTrue;
 
 public class AndroidUser {
 
@@ -58,11 +55,7 @@ public class AndroidUser {
 	public ButtonAction clicksTheButtonWithThisId(final int id){
 		return new ButtonAction(this).clicksTheButtonWithThisId(id);
 	}
-	
-	public ButtonAction clicksTheButtonWithThisText(final String text){
-		return new ButtonAction(this).clicksTheButtonWithThisText(text);
-	}
-	
+
 	public AndroidUser clicksTheElementsContainingThisText(final String text){
 		return new TextViewAction(this).clicksTheElementContainingThisText(text);
 	}
@@ -74,7 +67,7 @@ public class AndroidUser {
 	public ListViewActions looksAtThisListView(final int id){
 		return new ListViewActions(this).looksAtThisListView(id);
 	}
-	
+
 	public void quits() {
 		for (Activity activity : activities) {
 			activity.finish();
@@ -104,7 +97,7 @@ public class AndroidUser {
 		
 		while(timeOutHasNotExpired && elementIsStillVisible){
 			elementIsStillVisible = false;
-			TextView foundTextView = viewFetcher.getVisibleViewMatchingThisText(text);
+			TextView foundTextView = viewFetcher.getViewMatchingThisText(text);
 			
 			if(foundTextView != NO_RESULT_FOUND){
 				elementIsStillVisible = true;
@@ -124,7 +117,11 @@ public class AndroidUser {
 		
 		return this;
 	}
-	
+
+    public AndroidUser waits() throws InterruptedException {
+       Thread.sleep(3000);
+        return this;
+    }
 	
 	public AndroidUser waitsForThisTextToAppear(final String text) throws InterruptedException {
 		boolean timeOutHasExpired = false;
@@ -134,7 +131,7 @@ public class AndroidUser {
 		
 		while(!timeOutHasExpired && !elementIsVisible){
 			
-			TextView foundTextView = viewFetcher.getVisibleViewMatchingThisText(text);
+			TextView foundTextView = viewFetcher.getViewMatchingThisText(text);
 			
 			if( foundTextView != NO_RESULT_FOUND){
 				elementIsVisible = true;

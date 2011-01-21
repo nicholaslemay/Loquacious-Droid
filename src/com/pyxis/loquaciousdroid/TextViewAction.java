@@ -1,16 +1,11 @@
 package com.pyxis.loquaciousdroid;
 
+import android.widget.TextView;
+import org.junit.Assert;
+
 import static com.pyxis.loquaciousdroid.ViewFetcher.NO_RESULT_FOUND;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
-import org.junit.Assert;
-
-import android.os.SystemClock;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 public class TextViewAction {
 
@@ -26,7 +21,7 @@ public class TextViewAction {
 	}
 
 	public TextViewAction looksAtThisTextView(int id) {
-		selectedTextView = (TextView) viewFetcher.getVisibleViewById(id);
+		selectedTextView = (TextView) viewFetcher.getViewByID(id);
 		return this;
 	}
 
@@ -55,7 +50,7 @@ public class TextViewAction {
 	}
 
 	public AndroidUser clicksTheElementContainingThisText(final String text) {
-		final TextView view = viewFetcher.getVisibleViewMatchingThisText(text);
+		final TextView view = viewFetcher.getViewMatchingThisText(text);
 
 		if (view == NO_RESULT_FOUND) {
 			Assert.fail("No element containing this text : " + text + " was found");

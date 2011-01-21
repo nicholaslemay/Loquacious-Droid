@@ -1,12 +1,10 @@
 package com.pyxis.loquaciousdroid;
 
-import static com.pyxis.loquaciousdroid.ViewFetcher.NO_RESULT_FOUND;
-
-import org.junit.Assert;
-
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import org.junit.Assert;
+
+import static com.pyxis.loquaciousdroid.ViewFetcher.NO_RESULT_FOUND;
 
 public class ButtonAction {
 
@@ -20,7 +18,7 @@ public class ButtonAction {
 	
 	public ButtonAction clicksTheButtonWithThisId(final int id){
 		
-		final View viewFound = viewFetcher.getVisibleViewById(id);
+		final View viewFound = androidUser.getActivity().findViewById(id);
 		
 		if (viewFound == NO_RESULT_FOUND || !(viewFound instanceof Button)) {
 			Assert.fail("No button with this id : " + id + " was found");
@@ -31,21 +29,7 @@ public class ButtonAction {
 		
 		return this;
 	}
-	
-	public ButtonAction clicksTheButtonWithThisText(String text) {
-		final TextView viewFound = viewFetcher.getVisibleViewMatchingThisText(text);
-		
-		if (viewFound == NO_RESULT_FOUND || !(viewFound instanceof Button)) {
-			Assert.fail("No button with this text : " + text + " was found");
-		}
-		
-		Button button = (Button)viewFound;
-		clickThis(button);
-		
-		return this;
-	}
-	
-	
+
 	public AndroidUser andThen(){
 		return androidUser;
 	}

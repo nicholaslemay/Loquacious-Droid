@@ -1,13 +1,12 @@
 package com.pyxis.loquaciousdroid;
 
+import android.widget.ListView;
+import android.widget.TextView;
+import org.junit.Assert;
+
 import static com.pyxis.loquaciousdroid.ViewFetcher.NO_RESULT_FOUND;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import org.junit.Assert;
-
-import android.widget.ListView;
-import android.widget.TextView;
 
 public class ListViewActions {
 	
@@ -107,7 +106,7 @@ public class ListViewActions {
 	
 	
 	public AndroidUser andPressesForALongTimeTheElementThatContainsThisText(String text){
-		final TextView view = viewFetcher.getVisibleViewMatchingThisText(text);
+		final TextView view = viewFetcher.getViewMatchingThisText(text);
 		
 		if(view != NO_RESULT_FOUND){
 			textViewClicker.clickForALongTimeOnThis(view);
