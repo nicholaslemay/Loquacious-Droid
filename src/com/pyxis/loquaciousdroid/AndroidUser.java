@@ -72,6 +72,10 @@ public class AndroidUser {
         return new ListViewActions(this).looksAtThisListView(id);
     }
 
+    public ViewAction tapViewWithThisId(final int id){
+        return new ViewAction(this).tapViewWithThisId(id);
+    }
+
     public void quits() {
         for (Activity activity : activities) {
             activity.finish();
