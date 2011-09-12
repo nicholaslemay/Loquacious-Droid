@@ -1,11 +1,9 @@
 package com.pyxis.loquaciousdroid;
 
 import android.widget.TextView;
-import org.junit.Assert;
 
 import static com.pyxis.loquaciousdroid.ViewFetcher.NO_RESULT_FOUND;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static junit.framework.Assert.*;
 
 public class TextViewAction {
 
@@ -53,7 +51,7 @@ public class TextViewAction {
 		final TextView view = viewFetcher.getViewMatchingThisText(text);
 
 		if (view == NO_RESULT_FOUND) {
-			Assert.fail("No element containing this text : " + text + " was found");
+			fail("No element containing this text : " + text + " was found");
 		}
 
 		textViewClicker.clickOnThis(view);
