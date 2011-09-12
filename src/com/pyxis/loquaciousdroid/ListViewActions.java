@@ -2,11 +2,9 @@ package com.pyxis.loquaciousdroid;
 
 import android.widget.ListView;
 import android.widget.TextView;
-import org.junit.Assert;
 
 import static com.pyxis.loquaciousdroid.ViewFetcher.NO_RESULT_FOUND;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static junit.framework.Assert.*;
 
 public class ListViewActions {
 	
@@ -83,7 +81,7 @@ public class ListViewActions {
 				}
 			});
 		}else{
-			Assert.fail("No element with this text : " + text + " was found");
+			fail("No element with this text : " + text + " was found");
 		}
 		
 		return androidUser;
@@ -111,7 +109,7 @@ public class ListViewActions {
 		if(view != NO_RESULT_FOUND){
 			textViewClicker.clickForALongTimeOnThis(view);
 		}else{
-			Assert.fail("No element with this text : " + text + " was found");
+			fail("No element with this text : " + text + " was found");
 		}
 		
 		return androidUser;
