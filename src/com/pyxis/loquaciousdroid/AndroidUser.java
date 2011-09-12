@@ -23,6 +23,7 @@ public class AndroidUser {
     private Instrumentation instrumentation;
     private Activity originalActivity;
     private ArrayList<Activity> activities;
+    private int timeout;
 
     public AndroidUser(Instrumentation instrumentation, Activity originalActivity) {
         this.instrumentation = instrumentation;
@@ -32,6 +33,7 @@ public class AndroidUser {
         activityMonitor = instrumentation.addMonitor(filter, null, false);
         activities = new ArrayList<Activity>();
         activities.add(originalActivity);
+        timeout = 6000;
     }
 
     public AndroidUser andThen() {
@@ -78,8 +80,14 @@ public class AndroidUser {
 
     public AndroidUser waitsForThisActivityToShowUp(Class<?> activityToWaitFor) throws InterruptedException {
 
+        int elapsedTime = 0;
         while (!activityToWaitFor.getSimpleName().equals(getActivity().getClass().getSimpleName())) {
-            Thread.sleep(2000);
+
+            if (elapsedTime < timeout) {
+                Thread.sleep(2000);
+                elapsedTime += 2000;
+            } else
+                fail(MessageFormat.format("The time allowed [{0} ms] for the activity {1} to appear has expired", timeout, activityToWaitFor.getName()));
         }
 
         return this;
