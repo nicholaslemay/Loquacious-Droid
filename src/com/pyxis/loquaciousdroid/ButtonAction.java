@@ -2,9 +2,9 @@ package com.pyxis.loquaciousdroid;
 
 import android.view.View;
 import android.widget.Button;
-import org.junit.Assert;
 
 import static com.pyxis.loquaciousdroid.ViewFetcher.NO_RESULT_FOUND;
+import static junit.framework.Assert.fail;
 
 public class ButtonAction {
 
@@ -21,7 +21,7 @@ public class ButtonAction {
 		final View viewFound = androidUser.getActivity().findViewById(id);
 		
 		if (viewFound == NO_RESULT_FOUND || !(viewFound instanceof Button)) {
-			Assert.fail("No button with this id : " + id + " was found");
+			fail("No button with this id : " + id + " was found");
 		}
 		
 		Button button = (Button)viewFound;
