@@ -1,10 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-<name>Loquacious-Droid</name>
-<modelVersion>4.0.0</modelVersion>
-<groupId>com.pyxis.loquaciousdroid</groupId>
-<artifactId>Loquacious-Droid</artifactId>
-<version>0.1-SNAPSHOT</version>
-<packaging>jar</packaging>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <name>Loquacious-Droid</name>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.pyxis.loquaciousdroid</groupId>
+    <artifactId>Loquacious-Droid</artifactId>
+    <version>0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <description>User interaction driven scenario testing for Android using a fluent DSL</description>
     <url>https://github.com/nicholaslemay/Loquacious-Droid</url>
@@ -36,30 +37,30 @@
         <maven>${maven.version}</maven>
     </prerequisites>
 
-        <dependencies>
-            <dependency>
-                <groupId>com.google.android</groupId>
-                <artifactId>android</artifactId>
-                <version>${android.jar.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.google.android</groupId>
-                <artifactId>android-test</artifactId>
-                <version>${android.jar.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>3.8.1</version>
-                <scope>provided</scope>
-            </dependency>
-        </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>com.google.android</groupId>
+            <artifactId>android</artifactId>
+            <version>${android.jar.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.android</groupId>
+            <artifactId>android-test</artifactId>
+            <version>${android.jar.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
     <build>
-       
-       <sourceDirectory>src</sourceDirectory>
-    
+
+        <sourceDirectory>src</sourceDirectory>
+
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -150,12 +151,25 @@
                     <rules>
                         <requireMavenVersion>
                             <version>[${maven.version},)</version>
-                            <message>Check for Maven version &gt;=${maven.version} failed. Update your Maven install.</message>
+                            <message>Check for Maven version &gt;=${maven.version} failed. Update your Maven install.
+                            </message>
                         </requireMavenVersion>
                     </rules>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
-    
+
 </project>
