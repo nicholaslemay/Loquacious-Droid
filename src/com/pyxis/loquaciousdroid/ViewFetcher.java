@@ -41,6 +41,15 @@ public class ViewFetcher {
 		return null;
 	}
 	
-
+	public TextView getViewContainingThisText(String text){
+		ArrayList <View> viewList = jayWayViewFetcher.getAllViews(false);
+		for (View view : viewList){
+			if(view instanceof TextView && ((TextView)view).getText().toString().contains(text)){
+				return ((TextView)view);
+			}
+		}
+		
+		return null;
+	}
 
 }

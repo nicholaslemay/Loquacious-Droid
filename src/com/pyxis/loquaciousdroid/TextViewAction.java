@@ -1,6 +1,9 @@
 package com.pyxis.loquaciousdroid;
 
+import android.text.InputType;
 import android.widget.TextView;
+
+import static android.test.MoreAsserts.*;
 
 import static com.pyxis.loquaciousdroid.ViewFetcher.NO_RESULT_FOUND;
 import static junit.framework.Assert.*;
@@ -56,6 +59,24 @@ public class TextViewAction {
 
 		textViewClicker.clickOnThis(view);
 
+		return androidUser;
+	}
+
+	public AndroidUser andTextInPasswordFieldShouldBeVisible() {
+		androidUser.getActivity().runOnUiThread(new Runnable() {
+			public void run() {
+				assertEquals("Text password is not visible", InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD, selectedTextView.getInputType() & InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+			}
+		});
+		return androidUser;
+	}
+
+	public AndroidUser andTextInPasswordFieldShouldBeHidden() {
+		androidUser.getActivity().runOnUiThread(new Runnable() {
+			public void run() {
+				assertNotEqual("Text password is not visible", InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD, selectedTextView.getInputType() & InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+			}
+		});
 		return androidUser;
 	}
 
