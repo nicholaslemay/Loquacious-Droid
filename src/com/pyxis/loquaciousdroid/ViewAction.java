@@ -1,5 +1,6 @@
 package com.pyxis.loquaciousdroid;
 
+import android.R;
 import android.app.Instrumentation;
 import android.os.SystemClock;
 import android.view.MotionEvent;
@@ -12,7 +13,7 @@ import static junit.framework.Assert.fail;
 public class ViewAction {
 
     private Instrumentation instrumentation;
-    private final AndroidUser androidUser;
+    protected final AndroidUser androidUser;
     ViewFetcher viewFetcher;
 
     public ViewAction(AndroidUser androidUser) {
@@ -22,14 +23,15 @@ public class ViewAction {
     }
 
     public ViewAction tapViewWithThisId(int id) {
+        waitForIdleSync();
         final View view = androidUser.getActivity().findViewById(id);
 
         if (view == NO_RESULT_FOUND) {
             fail("No view with id : " + id + " was found");
         }
 
-        tapThis(view);
 
+        tapThis(view);
         return this;
     }
 
@@ -65,6 +67,24 @@ public class ViewAction {
         inst.sendPointerSync(event);
         inst.waitForIdleSync();
     }
+    
+    
+    public ViewAction shouldNotBeVisible(int viewId){
+    	View view = viewFetcher.getViewByID(viewId);
+		if(view != NO_RESULT_FOUND && view.isShown()){
+    		fail("The requested view is visible");
+    	}
+    	return this;
+    }
 
+    protected void runOnMainSync(Runnable runnable){
+        waitForIdleSync();
+        androidUser.getInstrumentation().runOnMainSync(runnable);
+
+    }
+
+    protected void waitForIdleSync(){
+        androidUser.getInstrumentation().waitForIdleSync();
+    }
 
 }
